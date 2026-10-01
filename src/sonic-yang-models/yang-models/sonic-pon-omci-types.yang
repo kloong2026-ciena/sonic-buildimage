@@ -1,0 +1,129 @@
+module sonic-pon-omci-types {
+    namespace "http://github.com/sonic-net/sonic-pon-omci-types";
+    prefix "omcitypes";
+    import ietf-yang-types {
+        prefix "yang";
+    }
+    import ietf-inet-types {
+        prefix "inet";
+    }
+    organization "SONiC";
+    contact
+        "SONiC";
+    description
+        "Common data types for SONiC OMCI YANG models.";
+
+    typedef header-input-type {
+        type enumeration {
+            enum string {
+                description "String input data type.";
+            }
+            enum integer {
+                description "Integer input data type.";
+            }
+        }
+        description "Input data types.";
+    }
+
+    typedef omci-db-ref {
+        type string {
+            length "1..64";
+            pattern '(\[(.+)\])+';
+        }
+        description "PON Controller database reference.";
+    }
+
+    typedef omci-disabled-value {
+        type uint16 {
+            range "65535";
+        }
+        description "PON Controller database disabled value.";
+    }
+
+    typedef omci-uint8 {
+        type union {
+            type uint8;
+            type omci-disabled-value;
+            type boolean;
+            type omci-db-ref;
+        }
+        description 
+            "OMCI 8-bit unsigned integer type. Note, the 'boolean' value is translated
+             to '0' or '1' when converted to values in an OMCI message";
+    }
+
+    typedef omci-uint16 {
+        type union {
+            type uint16;
+            type omci-disabled-value;
+            type omci-db-ref;
+        }
+        description "OMCI 16-bit unsigned integer type.";
+    }
+
+    typedef omci-uint32 {
+        type union {
+            type uint32;
+            type omci-disabled-value;
+            type omci-db-ref;
+        }
+        description "OMCI 32-bit unsigned integer type.";
+    }
+
+    typedef omci-uint64 {
+        type union {
+            type uint64;
+            type omci-disabled-value;
+            type omci-db-ref;
+        }
+        description "OMCI 64-bit unsigned integer type.";
+    }
+
+    typedef omci-string {
+        type union {
+            type omci-disabled-value;
+            type omci-db-ref;
+            type string {
+                length "0..64";
+            }
+            type omci-hex-string;
+        }
+        description "OMCI string type.";
+    }
+
+    typedef omci-hex-string {
+        type string {
+            length "2..75";
+            pattern '([0-9A-F]{2}[:])*([0-9A-F]{2})';
+        }
+        description "OMCI hexadecimal string type for displaying non-printable strings.";
+    }
+
+    typedef omci-mac-address {
+        type union {
+            type omci-disabled-value;
+            type yang:mac-address;
+            type omci-db-ref;
+        }
+        description "OMCI MAC Address type.";
+    }
+
+    typedef omci-ipv4-address {
+        type union {
+            type omci-disabled-value;
+            type inet:ipv4-address;
+            type omci-db-ref;
+        }
+        description "OMCI IPv4 address type.";
+    }
+
+    typedef omci-ipv6-address {
+        type union {
+            type omci-disabled-value;
+            type inet:ipv6-address;
+            type omci-db-ref;
+        }
+        description "OMCI IPv6 address type.";
+    }
+
+}
