@@ -1,0 +1,170 @@
+module sonic-pon-types {
+  namespace "http://github.com/sonic-net/sonic-pon-types";
+  prefix spt;
+  yang-version 1.1;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  organization "SONiC";
+  contact "SONiC";
+  description "Shared typedef definitions for SONiC PON YANG modules.";
+
+  typedef logging-level {
+    type enumeration {
+      enum emergency {
+        description "Enable emergency level logs and higher.";
+      }
+      enum alert {
+        description "Enable alert level logs and higher";
+      }
+      enum critical {
+        description "Enable critical level logs and higher.";
+      }
+      enum error {
+        description "Enable error level logs and higher.";
+      }
+      enum warning {
+        description "Enable warning level logs and higher.";
+      }
+      enum notice {
+        description "Enable notice level logs and higher.";
+      }
+      enum info {
+        description "Enable info level logs and higher.";
+      }
+      enum debug {
+        description "Enable debug level logs and higher.";
+      }
+      enum trace {
+        description "Enable trace level logs and higher.";
+      }
+      enum disable {
+        description "Disable logging.";
+      }
+    }
+    description "Logging severity level values.";
+  }
+
+  typedef logging-enable {
+    type enumeration {
+      enum enable {
+        description "Enable logging.";
+      }
+      enum disable {
+        description "Disable logging.";
+      }
+    }
+    description "Enable/disable toggle for OLT logging fields.";
+  }
+
+  typedef olt-encryption-mode {
+    type enumeration {
+      enum disabled {
+        description "Encryption is disabled.";
+      }
+      enum bidirectional {
+        description "Encryption in both upstream and downstream.";
+      }
+      enum downstream {
+        description "Encryption for downstream only.";
+      }
+    }
+    description "OLT PON encryption mode.";
+  }
+
+  typedef duplex-mode {
+    type enumeration {
+      enum auto {
+        description "Automatic duplex.";
+      }
+      enum full {
+        description "Full duplex.";
+      }
+      enum half {
+        description "Half duplex.";
+      }
+    }
+    description "Ethernet port duplex mode.";
+  }
+
+  typedef speed-mode {
+    type enumeration {
+      enum auto {
+        description "Automatic speed selection.";
+      }
+      enum 10 {
+        description "10 Mbps.";
+      }
+      enum 100 {
+        description "100 Mbps.";
+      }
+      enum 1000 {
+        description "1000 Mbps.";
+      }
+      enum 2500 {
+        description "2500 Mbps.";
+      }
+      enum 5000 {
+        description "5000 Mbps.";
+      }
+      enum 10000 {
+        description "10000 Mbps.";
+      }
+    }
+    description "Ethernet port speed.";
+  }
+
+  typedef fw-download-format {
+    type enumeration {
+      enum baseline-omci {
+        description "Baseline OMCI format.";
+      }
+      enum extended-omci {
+        description "Extended OMCI format.";
+      }
+    }
+    description "OMCI firmware download format.";
+  }
+
+  typedef service-config-value-type {
+    type enumeration {
+      enum array {
+        description "Array value.";
+      }
+      enum automatic {
+        description "Automatically determine the data type.";
+      }
+      enum boolean {
+        description "Boolean 'true' or 'false'.";
+      }
+      enum double {
+        description "Double precision floating point.";
+      }
+      enum int32 {
+        description "32-bit integer.";
+      }
+      enum int64 {
+        description "64-bit integer.";
+      }
+      enum object {
+        description "Object or document.";
+      }
+      enum null {
+        description "Null value.";
+      }
+      enum string {
+        description "UTF-8 string.";
+      }
+    }
+    description "Data type for service configuration parameter values.";
+  }
+
+  typedef pon-string64nz {
+    type string {
+      length "1..64";
+    }
+    description "A string with a minimum supported length of 1 character and a maximum supported length of 64 characters.";
+  }
+}
